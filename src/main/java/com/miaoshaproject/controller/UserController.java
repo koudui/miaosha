@@ -80,6 +80,7 @@ public class UserController extends BaseController {
         this.httpServletRequest.getSession().setAttribute("IS_LOGIN",true);
         this.httpServletRequest.getSession().setAttribute("LOGIN_USER",userModel);
         return CommonReturnType.create(null);
+
     }
 
 
