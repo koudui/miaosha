@@ -96,7 +96,7 @@ public class ItemServiceImpl implements ItemService {
         ItemStockDO itemStockDO=itemStockDOMapper.selectByItemId(itemDO.getId());
 
         //dataobject-->model
-        return null;
+        return convertModelFromItemDOAndItemStockDO(itemDO,itemStockDO);
     }
     //将item和item_stock转换成一个model并返回
     private ItemModel convertModelFromItemDOAndItemStockDO(ItemDO itemDO,ItemStockDO itemStockDO){

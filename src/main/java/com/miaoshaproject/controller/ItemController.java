@@ -8,9 +8,7 @@ import com.miaoshaproject.service.model.ItemModel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
@@ -30,6 +28,8 @@ public class ItemController extends BaseController {
     @Autowired
     private ItemService itemService;
     //创建商品的controller
+    @RequestMapping(value = "/create",method = {RequestMethod.POST},consumes = {CONTENT_TYPE_FORMAT})
+    @ResponseBody
     public CommonReturnType createItem(@RequestParam(name="title") String title,
                                        @RequestParam(name="description") String description,
                                        @RequestParam(name="price") BigDecimal price,
@@ -44,6 +44,14 @@ public class ItemController extends BaseController {
 
         ItemModel itemModel1Return=itemService.createItem(itemModel);
         ItemVO itemVO=this.convertItemVOFromItemModel(itemModel1Return);
+        return CommonReturnType.create(itemVO);
+    }
+    //浏览商品详情
+    @RequestMapping(value = "/get",method = {RequestMethod.GET})
+    @ResponseBody
+    public CommonReturnType get(@RequestParam(name="id") Integer id){
+        ItemModel itemModel=itemService.getItemById(id);
+        ItemVO itemVO=convertItemVOFromItemModel(itemModel);
         return CommonReturnType.create(itemVO);
     }
     private ItemVO convertItemVOFromItemModel(ItemModel itemModel){
