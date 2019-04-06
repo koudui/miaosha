@@ -105,6 +105,21 @@ public class ItemServiceImpl implements ItemService {
         //dataobject-->model
         return convertModelFromItemDOAndItemStockDO(itemDO,itemStockDO);
     }
+
+    @Override
+    @Transactional
+    public boolean decreaseStock(Integer itemId, Integer amount) throws BusinessException {
+        int affectRows=itemStockDOMapper.decreaseStock(itemId,amount);
+        if(affectRows>0){
+            //更新数据库成功
+            return true;
+        }else {
+            //更新数据库失败
+            return false;
+        }
+    }
+
+
     //将item和item_stock转换成一个model并返回
     private ItemModel convertModelFromItemDOAndItemStockDO(ItemDO itemDO,ItemStockDO itemStockDO){
         ItemModel itemModel=new ItemModel();
@@ -113,4 +128,6 @@ public class ItemServiceImpl implements ItemService {
         itemModel.setStock(itemStockDO.getStock());
         return itemModel;
     }
+
+
 }
