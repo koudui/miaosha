@@ -119,6 +119,12 @@ public class ItemServiceImpl implements ItemService {
         }
     }
 
+    @Override
+    @Transactional
+    public void increaseSales(Integer itemId, Integer amount) throws BusinessException {
+        itemDOMapper.increaseSales(itemId,amount);
+    }
+
 
     //将item和item_stock转换成一个model并返回
     private ItemModel convertModelFromItemDOAndItemStockDO(ItemDO itemDO,ItemStockDO itemStockDO){

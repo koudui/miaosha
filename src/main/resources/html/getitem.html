@@ -39,6 +39,11 @@
 				<label class="control-label"  id="sales" />
 			</div>
 		</div>
+		<div class="form-actions">
+			<button class="btn blue" id="createorder" type="submit">
+				下单
+			</button>
+		</div>
 		</div>
 	</body>
 	<script>
@@ -52,6 +57,32 @@
             return paramValue == "" && (paramValue = null), paramValue
         }
 		jQuery(document).ready(function(){
+		    $("#createorder").on("click",function () {
+                $.ajax({
+                    type:"POST",
+                    url:"http://localhost:8080/order/createorder",
+					contentType:"application/x-www-form-urlencoded",
+                    data:{
+                        "itemId":g_itemVO.id,
+						"amount":1,
+                    },
+                    xhrFields:{withCredentials:true},
+                    success:function(data){
+                        if(data.status=="success"){
+                            alert("下单成功");
+                            window.location.reload();//刷新页面
+                        }else{
+                            alert("商品下单失败，原因为："+data.data.errMsg);
+                            if(data.data.errCode==20003){
+                                window.location.href="login.html";
+							}
+                        }
+                    },
+                    error:function(data){
+                        alert("商品下单失败，原因为："+data.responseText)
+                    },
+                });
+            });
 			//获取商品详情
 				$.ajax({
 					type:"GET",

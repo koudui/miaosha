@@ -16,6 +16,7 @@ public enum EmBusinessError implements CommonError {
     //用户信息相关错误码定义20001
     USER_NOT_EXIST(20001,"用户不存在"),
     USER_LOGIN_FAIL(20002,"用户名或密码错误"),
+    USER_NOT_LOGIN(20003,"用户未登录"),
     //30000开头的表示交易信息错误
     STOCK_NOT_ENOUGH(30001,"库存不足"),
     ;
