@@ -12,7 +12,7 @@
     <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
     <result column="item_id" property="itemId" jdbcType="INTEGER" />
     <result column="promo_price" property="promoPrice" jdbcType="DOUBLE" />
-    <result column="end_date" property="end_date" jdbcType="TIMESTAMP" />
+    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     <!--
@@ -57,7 +57,7 @@
     insert into promo_info (id, promo_name, start_date, 
       item_id, promo_price,end_date)
     values (#{id,jdbcType=INTEGER}, #{promoName,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP}, 
-      #{itemId,jdbcType=INTEGER}, #{promoPrice,jdbcType=DOUBLE},#{enddate,jdbcType=TIMESTAMP})
+      #{itemId,jdbcType=INTEGER}, #{promoPrice,jdbcType=DOUBLE},#{endDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.miaoshaproject.dataobject.PromoDO" >
     <!--
