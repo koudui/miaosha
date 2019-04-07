@@ -41,6 +41,18 @@ public class ItemModel {
     //商品销量
     private Integer sales;
 
+    //使用聚合模型，如果PromoModel不为空，表示还有未结束的促销活动，包括
+    //未开始的和正在进行中的
+    private PromoModel promoModel;
+
+    public PromoModel getPromoModel() {
+        return promoModel;
+    }
+
+    public void setPromoModel(PromoModel promoModel) {
+        this.promoModel = promoModel;
+    }
+
     public Integer getId() {
         return id;
     }

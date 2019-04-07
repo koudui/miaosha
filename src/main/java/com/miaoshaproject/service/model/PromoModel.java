@@ -16,11 +16,19 @@ import java.math.BigDecimal;
 public class PromoModel {
     private Integer id;
 
+    //秒杀活动的状态，1表示还没开始，2表示正在进行中，3表示已经结束
+    //将活动状态放在model中的好处是外层service不用多次判断活动状态，而是可以直接
+    //从model中获取。
+    private Integer status;
+
     //促销活动名称
     private String promoName;
 
     //促销活动开始时间
     private DateTime startDate;
+
+    //促销活动结束时间
+    private DateTime endDate;
 
     //促销活动的商品
     private Integer itemId;
@@ -66,5 +74,21 @@ public class PromoModel {
 
     public void setPromoPrice(BigDecimal promoPrice) {
         this.promoPrice = promoPrice;
+    }
+
+    public DateTime getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(DateTime endDate) {
+        this.endDate = endDate;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }
