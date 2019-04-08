@@ -28,13 +28,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserDOMapper userDOMapper;
+    private UserDOMapper userDOMapper;//自动装配一个UserDOMapper，并可调用其中的方法操作数据库
 
     @Autowired
-    private UserPasswordDOMapper userPasswordDOMapper;
+    private UserPasswordDOMapper userPasswordDOMapper;//用户的账号和密码分开存储
 
     @Autowired
-    private ValidatorImpl validator;
+    private ValidatorImpl validator;//引入校验规则
 
     @Override
     public UserModel getUserById(Integer id) {
@@ -115,6 +115,7 @@ public class UserServiceImpl implements UserService {
             return null;
         }
         UserDO userDO=new UserDO();
+        //相同的属性会复制，不同的会跳过
         BeanUtils.copyProperties(userModel,userDO);
         return userDO;
     }

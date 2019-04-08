@@ -28,18 +28,21 @@ import java.util.Random;
  * @file: UserController
  * @description:
  */
+//@Controller 表明这个类是一个控制器类，和@RequestMapping来配合使用拦截请求，
+// 如果不在method中注明请求的方式，默认是拦截get和post请求
 @Controller("user")
 @RequestMapping("/user")
 @CrossOrigin(allowedHeaders = {"*"},allowCredentials = "true") //springboot前端请求的跨域问题
 public class UserController extends BaseController {
 
     @Autowired
-    private UserService userService;
+    private UserService userService;//用户服务层的相关方法
 
     @Autowired
-    private HttpServletRequest httpServletRequest;
+    private HttpServletRequest httpServletRequest;//处理http请求
 
     @RequestMapping("/get")
+    //后端返回json数据的话，需要配合@ResponseBody注解来完成
     @ResponseBody
 //    public UserVO getUser(@RequestParam(name="id") Integer id){
 //        //调用service服务获取对应id的用户对象并返回给前端

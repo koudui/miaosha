@@ -35,16 +35,16 @@ import java.time.format.DateTimeFormatter;
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
-    private SequenceDOMapper sequenceDOMapper;
+    private SequenceDOMapper sequenceDOMapper;//用于生成一个唯一6位自增数
 
     @Autowired
-    private ItemService itemService;
+    private ItemService itemService;//需要商品相关信息
 
     @Autowired
-    private UserService userService;
+    private UserService userService;//需要用户相关信息
 
     @Autowired
-    private OrderDOMapper orderDOMapper;
+    private OrderDOMapper orderDOMapper;//订单处理相关
 
     @Override
     @Transactional
@@ -58,6 +58,7 @@ public class OrderServiceImpl implements OrderService {
         if(userModel==null){
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"用户信息不存在");
         }
+        //不允许不购买或者单次购买超过10个的交易行为
         if(amount<=0||amount>10){
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"购买数量不合法");
         }
@@ -84,6 +85,7 @@ public class OrderServiceImpl implements OrderService {
         orderModel.setAmount(amount);
         orderModel.setItemId(itemId);
         orderModel.setUserId(userId);
+        //因为有促销活动，因此商品价格分情况设置
         if(promoId!=null){
             orderModel.setItemPrice(itemModel.getPromoModel().getPromoPrice());
         }else{
@@ -98,7 +100,7 @@ public class OrderServiceImpl implements OrderService {
         OrderDO orderDO=convertOrderDoFromOrderModel(orderModel);
         orderDOMapper.insertSelective(orderDO);
 
-        //返回商品销量
+        //增加销量
         itemService.increaseSales(itemId,amount);
         //4.返回前端
 
@@ -123,6 +125,7 @@ public class OrderServiceImpl implements OrderService {
         //中间6位为自增的数字，保证订单的唯一性
         //获取当前sequence
         int sequence=0;
+        //如果数据库中sequence_info的字段修改了，此处的order_info也需要修改
         SequenceDO sequenceDO=sequenceDOMapper.getSequenceByName("order_info");
         sequence=sequenceDO.getCurrentValue();
         sequenceDO.setCurrentValue(sequenceDO.getCurrentValue()+sequenceDO.getStep());
@@ -134,7 +137,7 @@ public class OrderServiceImpl implements OrderService {
         }
         stringBuilder.append(sequnceStr);
 
-        //最后两位为分库分表位
+        //最后两位为分库分表位，此处暂时写死
         stringBuilder.append("00");
 
         return stringBuilder.toString();
@@ -145,6 +148,7 @@ public class OrderServiceImpl implements OrderService {
         }
         OrderDO orderDO=new OrderDO();
         BeanUtils.copyProperties(orderModel,orderDO);
+        //类型不同的应当转换后设置
         orderDO.setItemPrice(orderModel.getItemPrice().doubleValue());
         orderDO.setOrderPrice(orderModel.getOrderPrice().doubleValue());
         return orderDO;

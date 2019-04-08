@@ -19,13 +19,13 @@ import java.util.Set;
  */
 @Component
 public class ValidatorImpl implements InitializingBean {
-    private Validator validator;//创建一个javax自带的validator对象
+    private Validator validator;//创建一个javax的validator对象
     @Override
     public void afterPropertiesSet() throws Exception {
         //通过Validation的默认工厂构造方法创建一个validator对象
         this.validator=Validation.buildDefaultValidatorFactory().getValidator();
     }
-    //实现检验方法并返回校验结果
+    //传入实现检验方法并返回校验结果
     public ValidationResult validate(Object bean){
         final ValidationResult result=new ValidationResult();
         Set<ConstraintViolation<Object>> constraintViolationSet=validator.validate(bean);

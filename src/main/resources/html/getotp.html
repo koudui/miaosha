@@ -38,6 +38,7 @@
 					data:{
 						"telphone":$("#telphone").val(),
 					},
+					//设置xhrFields授信后，可以使得跨域session共享
 					xhrFields:{withCredentials:true},
 					success:function(data){
 						if(data.status=="success"){

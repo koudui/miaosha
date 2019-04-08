@@ -15,9 +15,9 @@ import java.util.List;
  * @description:
  */
 public interface ItemService {
-    //创建商品
+    //创建商品，返回值为ItemModel
     ItemModel createItem(ItemModel itemModel) throws BusinessException;
-    //浏览商品列表
+    //浏览商品列表，使用List集合，在controller中可通过lambda表达式遍历
     List<ItemModel> listItem();
     //查看商品详情
     ItemModel getItemById(Integer id);

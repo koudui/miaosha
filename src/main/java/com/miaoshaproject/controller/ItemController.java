@@ -74,13 +74,18 @@ public class ItemController extends BaseController {
         }
         ItemVO itemVO=new ItemVO();
         BeanUtils.copyProperties(itemModel,itemVO);
+        //以下是处理促销活动相关的，itemVO已经设置了相关的属性
+
         if(itemModel.getPromoModel()!=null){
             //表示有正在进行或者待进行的秒杀活动
+            //0表示没有秒杀活动，1表示秒杀活动待开始，2表示秒杀活动正在进行中
             itemVO.setPromoStatus(itemModel.getPromoModel().getStatus());
             itemVO.setPromoId(itemModel.getPromoModel().getId());
             itemVO.setPromoPrice(itemModel.getPromoModel().getPromoPrice());
+            //返回给前端的日期格式应做些调整
             itemVO.setStartDate(itemModel.getPromoModel().getStartDate().toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
         }else{
+            //0表示没有秒杀活动，1表示秒杀活动待开始，2表示秒杀活动正在进行中
             itemVO.setPromoStatus(0);
         }
         return itemVO;

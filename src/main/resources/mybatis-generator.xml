@@ -25,7 +25,7 @@
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
-        <!--生成Mapping映射文件存放位置-->
+        <!--生成Mapping xml映射文件存放位置-->
         <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
@@ -33,28 +33,33 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.miaoshaproject.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
-        <!--生成对应表及类名-->
-        <!--
+        <!--生成对应表及类名，需要留意的事如果已经生成了文件，就不应该再次生成，而是应该
+        通过手动修改对应的三个文件，避免将文件信息覆盖了。-->
+        <!--根据数据库中的user_info表生成三种文件-->
         <table tableName="user_info" domainObjectName="UserDO" enableCountByExample="false"
         enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
         selectByExampleQueryId="false"></table>
+        <!--根据数据库中的user_password表生成三种文件-->
         <table tableName="user_password" domainObjectName="UserPasswordDO" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
-              -->
-        <!--<table tableName="item_info" domainObjectName="ItemDO" enableCountByExample="false"-->
-               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false"></table>-->
-        <!--<table tableName="item_stock" domainObjectName="ItemStockDO" enableCountByExample="false"-->
-               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false"></table>-->
-        <!--<table tableName="order_info" domainObjectName="OrderDO" enableCountByExample="false"-->
-               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false"></table>-->
-        <!--<table tableName="sequence_info" domainObjectName="SequenceDO" enableCountByExample="false"-->
-               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--selectByExampleQueryId="false"></table>-->
-        <!--促销活动数据库-->
+        <!--根据数据库中的item_info表生成三种文件-->
+        <table tableName="item_info" domainObjectName="ItemDO" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <!--根据数据库中的item_stock表生成三种文件-->
+        <table tableName="item_stock" domainObjectName="ItemStockDO" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <!--根据数据库中的order_info表生成三种文件-->
+        <table tableName="order_info" domainObjectName="OrderDO" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <!--根据数据库中的sequence_info表生成三种文件-->
+        <table tableName="sequence_info" domainObjectName="SequenceDO" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <!--根据数据库中的promo_info表生成三种文件-->
         <table tableName="promo_info" domainObjectName="PromoDO" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>

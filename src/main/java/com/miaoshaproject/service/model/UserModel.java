@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
  * @file: UserModel
  * @description:
  */
+//一般根据model来设计对应数据库；
+//在用户model中加入了Hibernate Validator来完成校验
 public class UserModel {
     private Integer id;
 

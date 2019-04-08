@@ -43,7 +43,7 @@ public class OrderController extends BaseController {
         if(isLogin==null || !isLogin.booleanValue()){
             throw new BusinessException(EmBusinessError.USER_NOT_LOGIN,"用户没有登录，不能下单");
         }
-        //获取用户id
+        //根据session获取用户id
         UserModel userModel=(UserModel)httpServletRequest.getSession().getAttribute("LOGIN_USER");
         OrderModel orderModel=orderService.createOrder(userModel.getId(),itemId,promoId,amount);
         return CommonReturnType.create(null);
